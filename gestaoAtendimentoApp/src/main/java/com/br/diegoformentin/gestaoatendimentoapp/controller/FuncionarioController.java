@@ -1,6 +1,7 @@
 package com.br.diegoformentin.gestaoatendimentoapp.controller;
 
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioDto;
+import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioRedefinirSenhaDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.LoginDto;
 import com.br.diegoformentin.gestaoatendimentoapp.service.FuncionarioService;
 import lombok.AllArgsConstructor;
@@ -38,5 +39,10 @@ public class FuncionarioController {
     @GetMapping("{id}")
     public FuncionarioDto findById(@PathVariable UUID id) {
         return funcionarioService.findById(id);
+    }
+
+    @PutMapping("redefirsenha")
+    public UUID alterarSenha(@RequestBody FuncionarioRedefinirSenhaDto dto) {
+        return funcionarioService.redefinirSenha(dto);
     }
 }

@@ -6,6 +6,7 @@ import com.br.diegoformentin.gestaoatendimentoapp.dto.CidadeDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.EnderecoCadastroDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.EstadoDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioDto;
+import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioRedefinirSenhaDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.LoginDto;
 import com.br.diegoformentin.gestaoatendimentoapp.entity.FuncionarioEntity;
 import com.br.diegoformentin.gestaoatendimentoapp.repository.EnderecoRepository;
@@ -125,6 +126,20 @@ public class FuncionarioService {
                                 .build())
                         .build())
                 .build();
+    }
+
+    public UUID redefinirSenha(FuncionarioRedefinirSenhaDto dto) {
+        final var usuario = usuarioRepository.findById(dto.getId()) //
+                .orElseThrow(() -> new IllegalStateException("Usuário não encontrado."));
+
+        if (dto.getSenha().equals(usuario.getSenha())) {
+            throw new IllegalStateException("A nova senha não pode ser igual a senha atual.");
+        }
+        
+        usuario.setSenha(dto.getSenha());
+        usuario.setSenhaRedefinida(true);
+
+        return usuarioRepository.save(usuario).getId();
     }
 
     private FuncionarioEntity dtoToEntity(FuncionarioDto dto) {

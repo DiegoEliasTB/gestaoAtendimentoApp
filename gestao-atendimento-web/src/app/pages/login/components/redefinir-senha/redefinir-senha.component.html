@@ -1,0 +1,42 @@
+<form [formGroup]="formSenha">
+  <div class="p-2">
+    <p class="text-center mb-2">
+      <b>Atenção</b>.<br />
+      Você precisa redefinir sua senha.
+    </p>
+  </div>
+  <div class="w-full p-2">
+    <p-floatlabel variant="on">
+      <p-password
+        formControlName="senha"
+        inputId="float-input-senha"
+        [feedback]="false"
+        [toggleMask]="true"
+        inputStyleClass="w-full"
+        styleClass="w-full"
+      />
+      <label for="float-input-senha">Senha</label>
+    </p-floatlabel>
+  </div>
+  <div class="w-full p-2">
+    <p-floatlabel variant="on">
+      <p-password
+        formControlName="confirmacaoSenha"
+        inputId="float-input-confirmacao-senha"
+        [feedback]="false"
+        [toggleMask]="true"
+        inputStyleClass="w-full"
+        styleClass="w-full"
+      />
+      <label for="float-input-confirmacao-senha">Confirmação de senha</label>
+    </p-floatlabel>
+  </div>
+  <div class="p-2 mt-2">
+    <p-button
+      label="Alterar senha"
+      styleClass="w-full w-32"
+      [severity]="'primary'"
+      (click)="submit()"
+    ></p-button>
+  </div>
+</form>

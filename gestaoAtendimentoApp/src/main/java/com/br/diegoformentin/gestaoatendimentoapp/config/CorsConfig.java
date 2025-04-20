@@ -47,6 +47,7 @@ public class CorsConfig implements WebMvcConfigurer {
                         .requestMatchers(new AntPathRequestMatcher("/funcionario/**", "GET")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/funcionario/register", "POST")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/funcionario/update", "PUT")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/funcionario/redefirsenha", "PUT")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userDetailsService)

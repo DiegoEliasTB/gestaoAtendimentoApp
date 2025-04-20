@@ -41,8 +41,10 @@ public class UsuarioService {
 
         if (usuarioExistente.get().getSenha().equals(dto.getSenha())) {
             return RetornoLogin.builder() //
+                    .idUsuario(usuarioExistente.get().getId()) //
                     .token(generateToken(usuarioExistente.get().getEmail())) //
                     .tipoUsuario(usuarioExistente.get().getTipoUsuario().toString()) //
+                    .alteracaoSenhaPendente(usuarioExistente.get().isSenhaRedefinida()) //
                     .build();
         }
 

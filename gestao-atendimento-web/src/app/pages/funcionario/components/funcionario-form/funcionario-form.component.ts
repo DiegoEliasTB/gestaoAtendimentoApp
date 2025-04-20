@@ -7,18 +7,17 @@ import {
 } from '@angular/forms';
 import { ButtonModule as ButtonModulePrimeng } from 'primeng/button';
 import { InputTextModule as InputTextModulePrimeng } from 'primeng/inputtext';
-//import { PanelModule as PanelModulePrimeng } from 'primeng/panel';
 import { FloatLabel as FloatLabelPrimeng } from 'primeng/floatlabel';
 import { PasswordModule as PasswordModulePrimeng } from 'primeng/password';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DividerModule as DividerModulePrimeNg } from 'primeng/divider';
-import { FuncionarioFormService } from './funcionario-form.service';
-import { HttpClientModule } from '@angular/common/http';
 import { SelectModule as SelectModulePrimeNg } from 'primeng/select';
+import { ToastModule as ToastModulePrimeNg } from 'primeng/toast';
+import { FuncionarioFormService } from './funcionario-form.service';
 import { EstadoInputSelect } from './model/entado-input-select';
 import { MessageService } from 'primeng/api';
-import { ToastModule as ToastModulePrimeNg } from 'primeng/toast';
 import { FuncionarioDto } from './model/funcionario-dto';
 
 @Component({

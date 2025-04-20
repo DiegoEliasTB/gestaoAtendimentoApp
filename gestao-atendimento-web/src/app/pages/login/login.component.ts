@@ -13,6 +13,9 @@ import { ToastModule as ToastModulePrimeNg } from 'primeng/toast';
 import { LoginService } from './login.service';
 import { LoginDto } from './model/LoginDto';
 import { LoginRetornoErrorDto } from './model/LoginRetornoErrorDto';
+import { Dialog, DialogModule as DialogModulePrimeNg } from 'primeng/dialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { RedefinirSenhaComponent } from './components/redefinir-senha/redefinir-senha.component';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +28,9 @@ import { LoginRetornoErrorDto } from './model/LoginRetornoErrorDto';
     PasswordModulePrimeng,
     HttpClientModule,
     ToastModulePrimeNg,
+    DialogModulePrimeNg,
   ],
-  providers: [MessageService, LoginService],
+  providers: [MessageService, LoginService, DialogService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -38,7 +42,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly messageService: MessageService,
     private readonly loginService: LoginService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -60,14 +65,28 @@ export class LoginComponent implements OnInit {
     this.loginService.login(formData).subscribe({
       next: (res) => {
         if (res && res.token) {
-          localStorage.setItem('authToken', res.token);
-          localStorage.setItem('perfil', res.tipoUsuario);
-          this.tipoUsuario = Number(res.tipoUsuario);
-          this.router.navigate(['/']);
-          this.messageService.add({
-            summary: 'teste',
-            detail: 'teste mais ainda',
-          });
+          if (!res.alteracaoSenhaPendente) {
+            this.dialogService
+              .open(RedefinirSenhaComponent, {
+                data: { id: res.idUsuario },
+                closeOnEscape: false,
+                closable: false,
+                modal: true,
+              })
+              .onClose.subscribe((it: boolean) => {
+                if (it) {
+                  localStorage.setItem('authToken', res.token);
+                  localStorage.setItem('perfil', res.tipoUsuario);
+                  this.tipoUsuario = Number(res.tipoUsuario);
+                  this.router.navigate(['/']);
+                }
+              });
+          } else {
+            localStorage.setItem('authToken', res.token);
+            localStorage.setItem('perfil', res.tipoUsuario);
+            this.tipoUsuario = Number(res.tipoUsuario);
+            this.router.navigate(['/']);
+          }
         }
       },
       error: (e: LoginRetornoErrorDto) => {
