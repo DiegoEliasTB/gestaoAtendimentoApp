@@ -92,7 +92,11 @@ export class AppComponent implements OnInit {
             icon: 'pi pi-home',
             command: () => this.router.navigateByUrl('/'),
           },
-          { label: 'Agenda', icon: 'pi pi-calendar' },
+          {
+            label: 'Agenda',
+            icon: 'pi pi-calendar',
+            command: () => this.router.navigateByUrl('/agenda'),
+          },
           {
             label: 'Clientes',
             icon: 'pi pi-users',
@@ -107,6 +111,7 @@ export class AppComponent implements OnInit {
             label: 'Atendimentos',
             icon: 'pi pi-address-book',
             disabled: true,
+            visible: false,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {

@@ -94,7 +94,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
       this.messageService.add({
         severity: 'secondary',
         summary: 'Formulário inválido',
-        detail: 'Preencha todos os campos para criar o usuário',
+        detail: 'Preencha todos os campos para criar o usuário cliente',
       });
       return;
     }
@@ -148,6 +148,7 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   private inicializaform(): void {
     const edicaoCliente = this.modalData.data;
     if (edicaoCliente) {
+      return;
     }
 
     this.clienteForm = new FormGroup({

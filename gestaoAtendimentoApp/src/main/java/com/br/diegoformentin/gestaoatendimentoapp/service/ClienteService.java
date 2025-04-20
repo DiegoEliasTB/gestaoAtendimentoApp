@@ -1,5 +1,6 @@
 package com.br.diegoformentin.gestaoatendimentoapp.service;
 
+import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteAutocompleteDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteRequestDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteResponseListDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioDto;
@@ -37,6 +38,15 @@ public class ClienteService {
                         .tipoUsuario(it.getTipoUsuario())
                         .observacao(it.getObservacao())
                         .dataCadastro(it.getDataCadastro())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public List<ClienteAutocompleteDto> listAllAutocomplete() {
+        final var clientes = clienteRepository.findAll();
+        return clientes.stream().map(it -> ClienteAutocompleteDto.builder()
+                        .id(it.getId())
+                        .nome(it.getNome())
                         .build())
                 .collect(Collectors.toList());
     }

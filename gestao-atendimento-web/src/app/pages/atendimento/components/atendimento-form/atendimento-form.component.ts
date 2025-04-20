@@ -51,8 +51,6 @@ export class AtendimentoFormComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log('Caiu no cadastro');
-
     if (!this.atendimentoForm.valid) {
       this.messageService.add({
         severity: 'secondary',
@@ -79,8 +77,6 @@ export class AtendimentoFormComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    console.log('Caiu na edição');
-
     if (!this.atendimentoForm.valid) {
       this.messageService.add({
         severity: 'secondary',

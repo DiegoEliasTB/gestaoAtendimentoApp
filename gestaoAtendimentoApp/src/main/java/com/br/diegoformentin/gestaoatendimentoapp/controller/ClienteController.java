@@ -1,5 +1,6 @@
 package com.br.diegoformentin.gestaoatendimentoapp.controller;
 
+import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteAutocompleteDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteRequestDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.cliente.ClienteResponseListDto;
 import com.br.diegoformentin.gestaoatendimentoapp.dto.funcionario.FuncionarioDto;
@@ -20,6 +21,11 @@ public class ClienteController {
     @GetMapping
     public List<ClienteResponseListDto> listAll() {
         return clienteService.listAll();
+    }
+
+    @GetMapping("autocomplete")
+    public List<ClienteAutocompleteDto> listAllAutoComplete() {
+        return clienteService.listAllAutocomplete();
     }
 
     @PostMapping("register")

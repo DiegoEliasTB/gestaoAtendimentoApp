@@ -91,7 +91,7 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
       this.messageService.add({
         severity: 'secondary',
         summary: 'Formulário inválido',
-        detail: 'Preencha todos os campos para criar o usuário',
+        detail: 'Preencha todos os campos para criar o usuário funcionário',
       });
       return;
     }

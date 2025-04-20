@@ -44,3 +44,16 @@ CREATE TABLE atendimento (
     valor_padrao NUMERIC(10,2) NOT NULL,
     duracao_padrao INTEGER NOT NULL
 );
+
+CREATE TABLE atendimento_cliente (
+    id UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    cliente UUID NOT NULL,
+    FOREIGN KEY (cliente) REFERENCES usuario(id),
+    atendimento UUID NOT NULL,
+    FOREIGN KEY (atendimento) REFERENCES atendimento(id),
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
+    duracao_sessao INTEGER NOT NULL,
+    valor NUMERIC(10,2) NOT NULL DEFAULT 0,
+    status_pagamento VARCHAR(6) NOT NULL DEFAULT 'ABERTO'
+)

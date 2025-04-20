@@ -85,6 +85,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 path.equals("/funcionario/update") ||
                 path.equals("/funcionario/redefirsenha") ||
                 path.equals("/cliente/register") ||
+                path.equals("/atendimento-cliente") ||
                 (path.startsWith("/atendimento") ||
                 (path.startsWith("/funcionario") && "GET".equals(method)) ||
                 (path.startsWith("/cliente") && "GET".equals(method)));
