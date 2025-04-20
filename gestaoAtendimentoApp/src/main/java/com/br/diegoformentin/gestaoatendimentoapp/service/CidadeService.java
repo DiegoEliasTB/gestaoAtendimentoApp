@@ -5,12 +5,13 @@ import com.br.diegoformentin.gestaoatendimentoapp.entity.CidadeEntity;
 import com.br.diegoformentin.gestaoatendimentoapp.repository.CidadeRepository;
 import com.br.diegoformentin.gestaoatendimentoapp.repository.EstadoRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CidadeService {
     private final CidadeRepository cidadeRepository;
     private final EstadoRepository estadoRepository;

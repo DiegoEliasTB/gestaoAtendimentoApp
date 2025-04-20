@@ -33,7 +33,14 @@ CREATE TABLE usuario (
     senha VARCHAR(255),
     endereco_comercial UUID NOT NULL,
     FOREIGN KEY (endereco_comercial) REFERENCES endereco(id),
-    data_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    data_cadastro DATE NOT NULL,
     observacao VARCHAR(255),
     senha_redefinida BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE atendimento (
+    id UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    descricao VARCHAR(150) NOT NULL,
+    valor_padrao NUMERIC(10,2) NOT NULL,
+    duracao_padrao INTEGER NOT NULL
 );

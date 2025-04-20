@@ -101,26 +101,30 @@ export class AppComponent implements OnInit {
           {
             label: 'Tipo atendimento',
             icon: 'pi pi-id-card',
-            //command: () => this.router.navigateByUrl('/funcionario'),
+            command: () => this.router.navigateByUrl('/atendimento'),
           },
           {
             label: 'Atendimentos',
             icon: 'pi pi-address-book',
+            disabled: true,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {
             label: 'Tipo despesa',
             icon: 'pi pi-shopping-bag',
+            disabled: true,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {
             label: 'Despesas',
             icon: 'pi pi-wallet',
+            disabled: true,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {
             label: 'Financeiro',
             icon: 'pi pi-chart-pie',
+            disabled: true,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {

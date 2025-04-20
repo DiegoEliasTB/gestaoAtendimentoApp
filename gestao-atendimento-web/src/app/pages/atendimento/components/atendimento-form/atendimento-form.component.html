@@ -1,0 +1,62 @@
+<div class="container-custom">
+  <form [formGroup]="atendimentoForm">
+    <div class="box-form-inside">
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="descricao"
+            type="text"
+            pInputText
+            id="float-input-descricao"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-descricao">Descrição</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="valorPadrao"
+            type="number"
+            pInputText
+            id="float-input-valor-padrao"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-valor-padrao">Valor padrão</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="duracaoPadrao"
+            type="number"
+            pInputText
+            id="float-input-duracao-padrao"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-duracao-padrao"
+            >Duração padrão (minutos)</label
+          >
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2 mt-2 flex justify-between">
+        <p-button
+          label="Cancelar"
+          styleClass="w-32"
+          [severity]="'danger'"
+          (click)="cancelar()"
+        ></p-button>
+        <p-button
+          label="Registrar"
+          styleClass="w-32"
+          [severity]="'primary'"
+          (click)="atendimentoForm.controls['id'].value ? edit() : submit()"
+        ></p-button>
+      </div>
+    </div>
+  </form>
+</div>
+<p-toast></p-toast>

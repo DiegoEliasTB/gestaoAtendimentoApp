@@ -1,0 +1,42 @@
+<div class="p-4">
+  <div class="flex w-full items-center justify-end">
+    <p-button
+      icon="pi pi-plus"
+      label="Cadastrar tipo de atendimento"
+      (click)="cadastrarAtendimento()"
+    ></p-button>
+  </div>
+  <p-table [value]="atendimentos" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Descrição</th>
+        <th>Valor padrão</th>
+        <th>Duração padrão</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-atendimento>
+      <tr>
+        <td>{{ atendimento.descricao }}</td>
+        <td>{{ atendimento.valorPadrao }}</td>
+        <td>{{ atendimento.duracaoPadrao }}</td>
+        <td>
+          <p-button
+            icon="pi pi-pencil"
+            severity="secondary"
+            rounded
+            (click)="editarAtendimento(atendimento.id)"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="secondary"
+            rounded
+            class="ml-2"
+            (click)="excluirAtendimento(atendimento.id)"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-toast></p-toast>
