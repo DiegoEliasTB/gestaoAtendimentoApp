@@ -1,10 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 import { ButtonModule as ButtonModulePrimeng } from 'primeng/button';
 import { InputTextModule as InputTextModulePrimeng } from 'primeng/inputtext';
 import { FloatLabel as FloatLabelPrimeng } from 'primeng/floatlabel';
@@ -12,16 +6,24 @@ import { PasswordModule as PasswordModulePrimeng } from 'primeng/password';
 import { DividerModule as DividerModulePrimeNg } from 'primeng/divider';
 import { SelectModule as SelectModulePrimeNg } from 'primeng/select';
 import { ToastModule as ToastModulePrimeNg } from 'primeng/toast';
+import { TextareaModule as TextareaModulePrimeNg } from 'primeng/textarea';
 import { CommonModule } from '@angular/common';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { FuncionarioFormService } from './funcionario-form.service';
-import { EstadoInputSelect } from './model/entado-input-select';
+import { FuncionarioFormService } from '../../../funcionario/components/funcionario-form/funcionario-form.service';
 import { MessageService } from 'primeng/api';
-import { FuncionarioDto } from './model/funcionario-dto';
+import { ClienteDto } from './model/cliente-dto';
+import { EstadoInputSelect } from './model/entado-input-select';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ClienteFormService } from './cliente-form.service';
 
 @Component({
-  selector: 'app-funcionario-form',
+  selector: 'app-cliente-form',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -33,14 +35,15 @@ import { FuncionarioDto } from './model/funcionario-dto';
     HttpClientModule,
     SelectModulePrimeNg,
     ToastModulePrimeNg,
+    TextareaModulePrimeNg,
   ],
-  providers: [FuncionarioFormService, MessageService],
-  templateUrl: './funcionario-form.component.html',
-  styleUrl: './funcionario-form.component.scss',
+  providers: [FuncionarioFormService, MessageService, ClienteFormService],
+  templateUrl: './cliente-form.component.html',
+  styleUrl: './cliente-form.component.scss',
 })
-export class FuncionarioFormComponent implements OnInit, OnDestroy {
-  funcionarioEdit!: FuncionarioDto;
-  funcionarioForm!: FormGroup;
+export class ClienteFormComponent implements OnInit, OnDestroy {
+  clienteEdit!: ClienteDto;
+  clienteForm!: FormGroup;
   inputEstadosData: EstadoInputSelect[] = [
     { estado: 'AC', label: 'Acre' },
     { estado: 'AL', label: 'Alagoas' },
@@ -73,21 +76,21 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly dialogRef: DynamicDialogRef,
-    private readonly funcionarioFormService: FuncionarioFormService,
     private readonly messageService: MessageService,
-    private modalData: DynamicDialogConfig
+    private modalData: DynamicDialogConfig,
+    private readonly clienteFormService: ClienteFormService
   ) {}
-
-  ngOnDestroy(): void {
-    this.dialogRef.destroy();
-  }
 
   ngOnInit(): void {
     this.inicializaform();
   }
 
+  ngOnDestroy(): void {
+    this.dialogRef.destroy();
+  }
+
   submit(): void {
-    if (!this.funcionarioForm.valid) {
+    if (!this.clienteForm.valid) {
       this.messageService.add({
         severity: 'secondary',
         summary: 'Formulário inválido',
@@ -98,7 +101,7 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
 
     const dto = this.getDtoByForm();
 
-    this.funcionarioFormService.criarFuncionario(dto).subscribe({
+    this.clienteFormService.criarCliente(dto).subscribe({
       next: (res) => {
         this.dialogRef.close(true);
       },
@@ -112,20 +115,20 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  cancelar() {
+  cancelar(): void {
     this.dialogRef.close(false);
   }
 
   buscarEnderecoPorCep() {
-    const inputCep = this.funcionarioForm.controls['cep'].value as string;
+    const inputCep = this.clienteForm.controls['cep'].value as string;
 
     if (inputCep) {
-      this.funcionarioFormService.getEndereco(inputCep).subscribe({
+      this.clienteFormService.getEndereco(inputCep).subscribe({
         next: (endereco) => {
-          this.funcionarioForm.controls['rua'].setValue(endereco.logradouro);
-          this.funcionarioForm.controls['bairro'].setValue(endereco.bairro);
-          this.funcionarioForm.controls['cidade'].setValue(endereco.localidade);
-          this.funcionarioForm.controls['estado'].setValue({
+          this.clienteForm.controls['rua'].setValue(endereco.logradouro);
+          this.clienteForm.controls['bairro'].setValue(endereco.bairro);
+          this.clienteForm.controls['cidade'].setValue(endereco.localidade);
+          this.clienteForm.controls['estado'].setValue({
             estado: endereco.uf,
             label: endereco.estado,
           });
@@ -143,75 +146,18 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
   }
 
   private inicializaform(): void {
-    const edicaoFuncionario = this.modalData.data;
-
-    if (edicaoFuncionario) {
-      this.funcionarioEdit = edicaoFuncionario as FuncionarioDto;
-
-      this.funcionarioForm = new FormGroup({
-        id: new FormControl(this.funcionarioEdit.id),
-        nome: new FormControl({
-          value: this.funcionarioEdit.nome,
-          disabled: true,
-        }),
-        cpf: new FormControl({
-          value: this.funcionarioEdit.cpf,
-          disabled: true,
-        }),
-        email: new FormControl({
-          value: this.funcionarioEdit.email,
-          disabled: true,
-        }),
-        senha: new FormControl({
-          value: this.funcionarioEdit.senha,
-          disabled: true,
-        }),
-
-        whatsapp: new FormControl({
-          value: this.funcionarioEdit.whatsapp,
-          disabled: true,
-        }),
-        enderecoComercial: new FormControl(
-          this.funcionarioEdit.enderecoComercial.id
-        ),
-        cep: new FormControl({
-          value: this.funcionarioEdit.enderecoComercial.cep,
-          disabled: true,
-        }),
-        rua: new FormControl({
-          value: this.funcionarioEdit.enderecoComercial.rua,
-          disabled: true,
-        }),
-        numero: new FormControl({
-          value: this.funcionarioEdit.enderecoComercial.numero,
-          disabled: true,
-        }),
-        bairro: new FormControl({
-          value: this.funcionarioEdit.enderecoComercial.bairro,
-          disabled: true,
-        }),
-        cidade: new FormControl({
-          value: this.funcionarioEdit.enderecoComercial.cidade.nome,
-          disabled: true,
-        }),
-        estado: new FormControl({
-          value: this.getEstadoDataInput(
-            this.funcionarioEdit.enderecoComercial.estado.sigla
-          ),
-          disabled: true,
-        }),
-      });
-
-      return;
+    const edicaoCliente = this.modalData.data;
+    if (edicaoCliente) {
     }
 
-    this.funcionarioForm = new FormGroup({
+    this.clienteForm = new FormGroup({
       id: new FormControl(null),
       nome: new FormControl(null, Validators.required),
       cpf: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
       senha: new FormControl(null, Validators.required),
       whatsapp: new FormControl(null),
+      observacao: new FormControl(null),
       cep: new FormControl(null),
       rua: new FormControl(null),
       numero: new FormControl(null, Validators.min(0)),
@@ -221,16 +167,17 @@ export class FuncionarioFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getDtoByForm(): FuncionarioDto {
-    const formulario = this.funcionarioForm.getRawValue();
+  private getDtoByForm(): ClienteDto {
+    const formulario = this.clienteForm.getRawValue();
     return {
       id: formulario.id,
-      tipoUsuario: 1,
+      tipoUsuario: 2,
       nome: formulario.nome,
       cpf: formulario.cpf,
       whatsapp: formulario.whatsapp,
       email: formulario.email,
       senha: formulario.senha,
+      observacao: formulario.observacao,
       enderecoComercial: {
         id: formulario.id,
         cep: formulario.cep,

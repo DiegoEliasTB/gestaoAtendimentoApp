@@ -1,0 +1,48 @@
+<div class="p-4">
+  <div class="flex w-full items-center justify-end">
+    <p-button
+      icon="pi pi-plus"
+      label="Cadastrar cliente"
+      (click)="cadastrarCliente()"
+    ></p-button>
+  </div>
+  <p-table [value]="clientes" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>WhatsApp</th>
+        <th>E-mail</th>
+        <th>Observação</th>
+        <th>Cadastrado</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-cliente>
+      <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.cpf }}</td>
+        <td>{{ cliente.whatsapp }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.observacao }}</td>
+        <td>{{ cliente.dataCadastro }}</td>
+        <td>
+          <p-button
+            icon="pi pi-search"
+            severity="secondary"
+            rounded
+            disabled="true"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="secondary"
+            rounded
+            disabled="true"
+            class="ml-2"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-toast></p-toast>

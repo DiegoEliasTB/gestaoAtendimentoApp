@@ -5,13 +5,17 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue("2")
 @Data
+@SuperBuilder
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class PacienteEntity extends UsuarioEntity {
+public class ClienteEntity extends UsuarioEntity {
 
-    @Column(length = 255)
+    @Column(name = "observacao", length = 255)
     private String observacao;
 }

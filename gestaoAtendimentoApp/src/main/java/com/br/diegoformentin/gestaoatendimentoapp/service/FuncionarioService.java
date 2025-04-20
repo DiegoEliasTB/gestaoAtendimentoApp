@@ -135,7 +135,7 @@ public class FuncionarioService {
         if (dto.getSenha().equals(usuario.getSenha())) {
             throw new IllegalStateException("A nova senha não pode ser igual a senha atual.");
         }
-        
+
         usuario.setSenha(dto.getSenha());
         usuario.setSenhaRedefinida(true);
 

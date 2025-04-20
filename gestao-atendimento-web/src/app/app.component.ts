@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
           {
             label: 'Clientes',
             icon: 'pi pi-users',
-            //command: () => this.router.navigateByUrl('/funcionario'),
+            command: () => this.router.navigateByUrl('/cliente'),
           },
           {
             label: 'Tipo atendimento',
