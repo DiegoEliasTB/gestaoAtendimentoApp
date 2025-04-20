@@ -1,0 +1,39 @@
+<div class="container-custom">
+  <p-panel>
+    <form [formGroup]="formLogin">
+      <div class="box-form-inside">
+        <div class="w-full">
+          <p-floatlabel variant="on" class="flex w-full">
+            <input
+              formControlName="email"
+              type="email"
+              pInputText
+              id="float-input-email"
+              autocomplete="off"
+              class="w-full"
+            />
+            <label for="float-input-email">E-mail</label>
+          </p-floatlabel>
+        </div>
+        <div class="w-full mt-4">
+          <p-floatlabel variant="on">
+            <p-password
+              formControlName="senha"
+              inputId="float-input-senha"
+              [feedback]="false"
+              [toggleMask]="true"
+              inputStyleClass="w-full"
+              styleClass="w-full"
+            />
+            <label for="float-input-senha">Senha</label>
+          </p-floatlabel>
+        </div>
+      </div>
+    </form>
+    <div class="mt-5">
+      <p-button label="Login" (click)="submit()" styleClass="w-full" />
+    </div>
+  </p-panel>
+</div>
+<!-- fncinou aqui -->
+<p-toast></p-toast>

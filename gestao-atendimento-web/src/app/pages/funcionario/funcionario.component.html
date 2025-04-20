@@ -1,0 +1,44 @@
+<div class="p-4">
+  <div class="flex w-full items-center justify-end">
+    <p-button
+      icon="pi pi-plus"
+      label="Cadastrar funcionário"
+      (click)="cadastrarFuncionario()"
+    ></p-button>
+  </div>
+  <p-table [value]="funcionarios" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>WhatsApp</th>
+        <th>E-mail</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-funcionario>
+      <tr>
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.cpf }}</td>
+        <td>{{ funcionario.whatsapp }}</td>
+        <td>{{ funcionario.email }}</td>
+        <td>
+          <p-button
+            icon="pi pi-search"
+            severity="secondary"
+            rounded
+            (click)="editarFuncionario(funcionario.id)"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="secondary"
+            rounded
+            disabled="true"
+            class="ml-2"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-toast></p-toast>

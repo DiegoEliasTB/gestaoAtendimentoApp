@@ -1,0 +1,170 @@
+<div class="container-custom">
+  <form [formGroup]="funcionarioForm">
+    <div class="box-form-inside">
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="nome"
+            type="text"
+            pInputText
+            id="float-input-nome"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-nome">Nome</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="cpf"
+            type="text"
+            pInputText
+            id="float-input-cpf"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-nome">CPF</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="whatsapp"
+            type="text"
+            pInputText
+            id="float-input-whatsapp"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-nome">WhatsApp</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="email"
+            type="email"
+            pInputText
+            id="float-input-email"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-nome">E-mail</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on">
+          <p-password
+            formControlName="senha"
+            inputId="float-input-senha"
+            [feedback]="false"
+            [toggleMask]="true"
+            inputStyleClass="w-full"
+            styleClass="w-full"
+          />
+          <label for="float-input-senha">Senha</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full px-3">
+        <p-divider>Endereço</p-divider>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="cep"
+            type="text"
+            pInputText
+            id="float-input-cep"
+            autocomplete="off"
+            class="w-full"
+            (blur)="buscarEnderecoPorCep()"
+          />
+          <label for="float-input-cep">CEP</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="rua"
+            type="text"
+            pInputText
+            id="float-input-rua"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-rua">Rua</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="numero"
+            type="number"
+            pInputText
+            id="float-input-numero"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-numero">Número</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="bairro"
+            type="text"
+            pInputText
+            id="float-input-bairro"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-bairro">Bairro</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-floatlabel variant="on" class="flex w-full">
+          <input
+            formControlName="cidade"
+            type="text"
+            pInputText
+            id="float-input-cidade"
+            autocomplete="off"
+            class="w-full"
+          />
+          <label for="float-input-cidade">Cidade</label>
+        </p-floatlabel>
+      </div>
+      <div class="w-full p-2">
+        <p-select
+          formControlName="estado"
+          class="w-full"
+          optionLabel="label"
+          placeholder="Estado"
+          class="w-full"
+          [options]="inputEstadosData"
+          optionLabel="label"
+        />
+      </div>
+
+      <div
+        *ngIf="!funcionarioEdit"
+        class="w-full p-2 mt-2 flex justify-between"
+      >
+        <p-button
+          label="Cancelar"
+          styleClass="w-32"
+          [severity]="'danger'"
+          (click)="cancelar()"
+        ></p-button>
+        <p-button
+          label="Registrar"
+          styleClass="w-32"
+          [severity]="'primary'"
+          (click)="submit()"
+        ></p-button>
+      </div>
+    </div>
+  </form>
+</div>
+<p-toast></p-toast>
