@@ -31,10 +31,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.inicializaUrlAtual();
     this.verificaUsuarioLogado();
-    // this.items = [
-    //   { label: 'New22', icon: 'pi pi-plus' },
-    //   { label: 'Search', icon: 'pi pi-search' },
-    // ];
   }
 
   private inicializaUrlAtual(): void {
@@ -118,12 +114,14 @@ export class AppComponent implements OnInit {
             label: 'Tipo despesa',
             icon: 'pi pi-shopping-bag',
             disabled: true,
+            visible: false,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {
             label: 'Despesas',
             icon: 'pi pi-wallet',
             disabled: true,
+            visible: false,
             //command: () => this.router.navigateByUrl('/funcionario'),
           },
           {

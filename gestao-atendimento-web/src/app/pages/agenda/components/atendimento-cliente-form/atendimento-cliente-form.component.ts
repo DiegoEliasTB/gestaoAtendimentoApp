@@ -38,7 +38,6 @@ import { AtendimentoClienteRequestDto } from './model/atendimento-cliente-reques
   styleUrl: './atendimento-cliente-form.component.scss',
 })
 export class AtendimentoClienteFormComponent implements OnInit, OnDestroy {
-  //clienteEdit!: AtendimentoClienteDto;
   atendimentoClienteForm!: FormGroup;
   inputSelectClienteData: ClienteAutocompleteDto[] = [];
   inputSelectTipoAtendimentoData: AtendimentoDto[] = [];
@@ -130,8 +129,8 @@ export class AtendimentoClienteFormComponent implements OnInit, OnDestroy {
 
   private formataData(data: Date): string {
     const ano = data.getFullYear();
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Adiciona zero à esquerda se for mês de um dígito
-    const dia = data.getDate().toString().padStart(2, '0'); // Adiciona zero à esquerda se for dia de um dígito
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+    const dia = data.getDate().toString().padStart(2, '0');
 
     return `${ano}-${mes}-${dia}`;
   }

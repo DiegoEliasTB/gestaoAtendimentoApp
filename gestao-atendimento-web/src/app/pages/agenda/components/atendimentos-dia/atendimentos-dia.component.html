@@ -1,0 +1,31 @@
+<div *ngFor="let item of data" class="mb-4">
+  <p-panel>
+    <div class="flex w-full justify-between">
+      <div>
+        <p><b>Tipo de atendimento: </b> {{ item.atendimento.descricao }}</p>
+        <p><b>Cliente: </b>{{ item.cliente.nome }}</p>
+      </div>
+      <div class="text-center">
+        Status pagamento
+        <p class="border border-solid border-black rounded-sm">
+          <b>{{ item.statusPagamento }}</b>
+        </p>
+      </div>
+    </div>
+  </p-panel>
+</div>
+
+<div class="w-full p-2 mt-2 flex justify-between">
+  <p-button
+    label="Sair"
+    styleClass="w-42"
+    [severity]="'danger'"
+    (click)="sair()"
+  ></p-button>
+  <p-button
+    label="Criar atendimento"
+    styleClass="w-42"
+    [severity]="'primary'"
+    (click)="navegar()"
+  ></p-button>
+</div>
