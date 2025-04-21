@@ -82,13 +82,22 @@ export class AtendimentoComponent implements OnInit {
   }
 
   excluirAtendimento(id: string) {
-    this.atendimentoService.deleteAtendimentoById(id).subscribe(() => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Sucesso',
-        detail: 'Tipo de atendimento excluído com sucesso',
-      });
-      this.inicializaTable();
+    this.atendimentoService.deleteAtendimentoById(id).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Tipo de atendimento excluído com sucesso',
+        });
+        this.inicializaTable();
+      },
+      error: (e) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Exclusão não permitida',
+          detail: 'Não é permitido excluir esse tipo de atendimento',
+        });
+      },
     });
   }
 

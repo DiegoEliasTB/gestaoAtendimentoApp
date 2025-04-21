@@ -1,0 +1,17 @@
+.custom-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  size: 24px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.imagem-background {
+  width: 400px;
+}
