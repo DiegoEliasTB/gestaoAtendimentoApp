@@ -1,4 +1,4 @@
-<div class="flex-col h-screen">
+<div>
   <div class="flex w-full items-center justify-end">
     <p-button
       icon="pi pi-plus"
@@ -6,6 +6,11 @@
       (click)="cadastrarAtendimentoCliente()"
     ></p-button>
   </div>
-  <div class="quadrado-calendario"></div>
+  <!-- <app-calendario [dadoViaInput]="dadosCalendario"></app-calendario> -->
+  <full-calendar
+    #calendariocomponente
+    class="calendario"
+    [options]="calendarOptions"
+  ></full-calendar>
 </div>
 <p-toast></p-toast>

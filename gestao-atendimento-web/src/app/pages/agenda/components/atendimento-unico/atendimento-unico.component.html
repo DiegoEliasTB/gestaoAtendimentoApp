@@ -1,0 +1,51 @@
+<div class="w-full p-2 mt-2 flex flex-col justify-between">
+  <p-panel header="Categoria do serviço">
+    <div>
+      <!-- <p-divider class="mt-0"><b>atendimento</b></p-divider> -->
+      <p><b>Tipo de atendimento:</b> {{ data.atendimento.descricao }}</p>
+      <p><b>Duração padrão:</b> {{ data.atendimento.duracaoPadrao }} minutos</p>
+      <p><b>Valor padrão:</b> R$ {{ data.atendimento.valorPadrao }}</p>
+      <p><b>Tipo de atendimento:</b> {{ data.atendimento.descricao }}</p>
+    </div>
+  </p-panel>
+
+  <p-panel header="Paciente" class="mt-4">
+    <div>
+      <p><b>Nome:</b> {{ data.cliente.nome }}</p>
+      <p><b>Documento CPF:</b> {{ data.cliente.cpf }}</p>
+      <p><b>WhatsApp:</b> {{ data.cliente.whatsapp }}</p>
+      <p><b>E-mail:</b> {{ data.cliente.email }}</p>
+      <p><b>Observação:</b> {{ data.cliente.observacao }}</p>
+    </div>
+  </p-panel>
+
+  <p-panel header="Agendamento" class="mt-4">
+    <div>
+      <p><b>Data do agendamento:</b> {{ data.data }}</p>
+      <p><b>Duração da sessão:</b> {{ data.duracaoSessao }} minutos</p>
+      <p><b>Hora:</b> {{ data.hora }}</p>
+      <p><b>Valor serviço:</b> R$ {{ data.valor }}</p>
+      <p>
+        <b>Status do pagamento:</b>
+        <b class="border border-solid border-black rounded-sm ml-2">{{
+          data.statusPagamento
+        }}</b>
+      </p>
+    </div>
+  </p-panel>
+
+  <div class="w-full mt-4 flex justify-between">
+    <p-button
+      label="Sair"
+      styleClass="w-42"
+      [severity]="'danger'"
+      (click)="sair()"
+    ></p-button>
+    <p-button
+      label="Criar atendimento"
+      styleClass="w-42"
+      [severity]="'primary'"
+      (click)="navegar()"
+    ></p-button>
+  </div>
+</div>
